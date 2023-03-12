@@ -1,9 +1,11 @@
 # ESP32 micropython
 ![board](static/ESP32-38pin.png)
+[Micropython Documentation](https://docs.micropython.org/en/latest/index.html)
 ## **ESPTOOL**
+[ESPTOOL Documentation](https://docs.espressif.com/projects/esptool/en/latest/esp32/index.html)
 ### installation
 ```bash
-pip install esptool
+pip3 install esptool
 ```
 ### Erase flash
 ```bash
@@ -16,6 +18,7 @@ esptool --port COM4 erase_flash
 esptool --chip esp32 --port COM4 write_flash -z 0x1000 esp32-idf3-20210202-v1.14.bin
 ```
 ## **AMPY**
+[AMPY Documentation](https://pypi.org/project/adafruit-ampy/)
 ### install ampy
 ```bash
 pip3 install adafruit-ampy
@@ -26,6 +29,7 @@ pip3 install adafruit-ampy
 -b, --baud BAUD  Baud rate for the serial connection. (default 115200)  
 -d, --delay DELAY Delay in seconds before entering RAW MODE (default 0)  
 --help           Show this message and exit.
+--no-output Do not show the output, do not enter to REPL
 ```
 ## Configuration
 For convenience you can set an **AMPY_PORT** environment variable which will be used if the port parameter is not specified.
@@ -49,8 +53,9 @@ ampy mkdir #create a directory on the board
 ampy rmdir #forcefully remove a folder and its children on the board
 ampy rm file.py #remove a file from the board
 ampy run file.py #run a script
-ampy put file.py #put a file or folder and its content
 ampy get file.py #retrieve a file
+ampy put file.py #put a file or folder and its content
+ampy put test.py /main.py #copy the content from test.py to main.py
 ```
 ## USE
 1. Set the port `set AMPY_PORT=COM4`
@@ -64,3 +69,10 @@ ampy put file.py
 ampy put main.py
 ```
 5. Execute the file `ampy run file.py` or `ampy run main.py`
+
+## Serial Connection
+For linux:
+```bash
+screen /dev/tty.board_name 115200
+```
+To exit, press `Ctrl-a` then `k` then `y` or `Ctrl-a` then typing `:quit`
