@@ -31,7 +31,7 @@ pip3 install adafruit-ampy
 --help           Show this message and exit.
 --no-output Do not show the output, do not enter to REPL
 ```
-## Configuration
+### Configuration
 For convenience you can set an **AMPY_PORT** environment variable which will be used if the port parameter is not specified.
 ```bash
 #For windows  
