@@ -1,14 +1,16 @@
 # ESP32 micropython
-![board](static/ESP32-38pin.png).
+![board](static/ESP32-38pin.png)
 ## **ESPTOOL**
-## installation
+### installation
+```bash
 pip install esptool
-## Erase flash
+```
+### Erase flash
 ```bash
 #For windows change the port: COM4 --> /dev/ttyUSB0  
 esptool --port COM4 erase_flash
 ```
-## Deploy new firmware
+### Deploy new firmware
 ```bash
 #For Linux change the port: COM4 --> /dev/ttyUSB0  
 esptool --chip esp32 --port COM4 write_flash -z 0x1000 esp32-idf3-20210202-v1.14.bin
