@@ -1,29 +1,22 @@
-# Complete project details at https://RandomNerdTutorials.com
-from machine import deepsleep
 from machine import Pin
-from time import sleep
+import time
 
-led = Pin (2, Pin.OUT)
+led=Pin(2,Pin.OUT)
+led.off()
+count=0
+# print some text to the serial console
+print('Hello MicroPython!')
 
-#blink LED
-led.value(1)
-sleep(0.5)
-led.value(0)
-sleep(0.5)
-led.value(1)
-sleep(0.5)
-led.value(0)
-sleep(0.5)
-led.value(1)
-sleep(0.5)
-led.value(0)
-sleep(0.5)
 
-# wait 5 seconds so that you can catch the ESP awake to establish a serial communication later
-# you should remove this sleep line in your final script
-sleep(2)
+def blink(n,ms):
+    for x in range(n):
+        led.on()
+        time.sleep_ms(ms)
+        led.off()
+        time.sleep_ms(ms)
 
-print('Im awake, but Im going to sleep')
-
-#sleep for 10 seconds (10000 milliseconds)
-deepsleep(5000)
+while(1):
+    count+=1
+    print(count)
+    blink(1,2000)
+    help('modules')
