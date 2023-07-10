@@ -41,6 +41,10 @@ def BlinkLED(timer_one):
 
 # Initialize the SD card
 #######Hardware SPI#######
+##Default SPI pins
+    # SPI  |  MOSI  |  MISO  |  SCLK  |   CS   |
+    # VSPI | GPIO23 | GPIO19 | GPIO18 | GPIO5  |
+    # HSPI | GPIO13 | GPIO12 | GPIO14 | GPIO15 |
 # hspi = SPI(1, 10000000)
 # hspi = SPI(1, 10000000, sck=Pin(14), mosi=Pin(13), miso=Pin(12))
 # vspi = SPI(2, baudrate=80000000, polarity=0, phase=0, bits=8, firstbit=0, sck=Pin(18), mosi=Pin(23), miso=Pin(19))

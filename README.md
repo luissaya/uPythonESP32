@@ -77,3 +77,24 @@ For linux:
 screen /dev/tty.board_name 115200
 ```
 To exit, press `Ctrl-a` then `k` then `y` or `Ctrl-a` then typing `:quit`
+
+## Pymakr
+- Install [nodejs](https://nodejs.org).
+- Install [PYMAKR](https://marketplace.visualstudio.com/items?itemName=pycom.Pymakr) on VScode.
+- Create a project(where three files will be created `main.py`, `boot.py` and `pymakr.conf`).
+- Inside `main.py` put the code.
+- To run the code in the device:
+  * Connect the device and select `connect device`.
+  * Press `Sync project to device`.
+  * After the upload finish, press the option `Hard reset the device` to execute the script.
+- To run the REPL, press `Create terminal`.
+- To see the files inside the device, press `Open device in file explorer`.
+
+## PlatformIO
+- install [python](https://python.org/download)
+- install [PlatformIO](https://marketplace.visualstudio.com/publishers/platformio)
+- create a new project
+- select the board `DOIT ESP32 DEVKIT V1`
+- a folder will be created
+- put your code inside `src/main.cpp`
+- edit `platformio.ini`, specify the baudrate `monitor_speed = 115200`
