@@ -29,26 +29,47 @@ class WIFI:
     macAddr = ubinascii.hexlify(macBinary,':').decode().upper()
     return macAddr
 
-class MQTT:
-  def __init__(self, clientID, broker, port, topic_sub, debug = True):
-    self.mqtt = MQTTClient(clientID, broker, port)
-    self.debug = debug
-    self.topic_sub = topic_sub
-    self.mqtt.set_callback(self.__callback_sub()) 
-    self.mqtt.connect()
-    self.mqtt.subscribe(topic_sub)
-    if debug : print("Connected to MQTT  Broker : {broker}, Port: {port}, client ID: {clientID} and subscribed to the topic: {topic_sub}")
+# class MQTT:
+#   def __init__(self, clientID, broker, port, topic_sub, debug = True):
+#     self.mqtt = MQTTClient(clientID, broker, port)
+#     self.debug = debug
+#     self.topic_sub = topic_sub
+#     self.mqtt.set_callback(self.__callback_sub)
+#     self.mqtt.connect()
+#     self.mqtt.subscribe(topic_sub)
+#     if debug : print("Connected to MQTT  Broker : {broker}, Port: {port}, client ID: {clientID} and subscribed to the topic: {topic_sub}")
 
-  #run object.mqtt.check_msg() to periodically check the incoming data
-  def __callback_sub(topic, payload):
-    if self.debug : print("Received from Topic: {topic}, message: {payload}")
+#   #run object.mqtt.check_msg() to periodically check the incoming data
+#   def __callback_sub(topic, payload):
+#     if self.debug : print("Received from Topic: {topic}, message: {payload}")
 
-  def subscribeMQTT(self, topic):
-    self.mqtt.subscribe(topic)
-    if self.debug : print("Subscribed to the topic: {topic}") 
+#   def subscribeMQTT(self, topic):
+#     self.mqtt.subscribe(topic)
+#     if self.debug : print("Subscribed to the topic: {topic}") 
 
-  #topic is bites and message is a dictionary
-  def publishMQTT(self, topic, message):
-    payload = json.dumps(message).encode()
-    self.mqtt.publish(topic, message)
-    if self.debug : print("Publish to the topic: {topic}, the message: {message}")
+#   #topic is bites and message is a dictionary
+#   def publishMQTT(self, topic, message):
+#     payload = json.dumps(message).encode()
+#     self.mqtt.publish(topic, message)
+#     if self.debug : print("Publish to the topic: {topic}, the message: {message}")
+debugGlobal = True
+
+def MQTT(clientID, broker, port, topic_sub, callback, debug = True):
+  global debugGlobal 
+  debugGlobal = debug
+  mqtt = MQTTClient(clientID, broker)
+  # mqtt = MQTTClient(clientID, broker, port, user=None, password=None, keepalive=60)
+  mqtt.set_callback(callback)
+  mqtt.connect()
+  mqtt.subscribe(topic_sub)
+  if debug : print(f"Connected to MQTT  Broker : {broker}, Port: {port}, client ID: {clientID} and subscribed to the topic: {topic_sub}")
+  return mqtt
+
+def PUBLISH(topic, message, mqtt):
+  payload = json.dumps(message) # .encode()
+  mqtt.publish(topic, payload)
+  if debugGlobal : print(f"Publish to the topic: {topic}, the message: {message}")
+
+def SUBSCRIBE(topic, mqtt):
+  mqtt.subscribe(topic)
+  if debugGlobal : print(f"Subscribed to the topic: {topic}") 
